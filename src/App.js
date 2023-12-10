@@ -11,7 +11,7 @@ import Home from './pages/home/Home.js';
 import Item from './pages/item/Item.js';
 import LogIn from './pages/login/LogIn.js';
 import ShoppingCart from './pages/shoppingCart/ShoppingCart.js';
-import UserInfo from './pages/userInfo/UserInfo.js';
+import NewUser from './pages/newUser/NewUser.js'
 
 function App() {
 
@@ -62,8 +62,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/item/:itemNumber" element={<Item />} />
           <Route path="/login" element={<LogIn />} />
+          <Route path="/newUser" element={<NewUser />} />
           <Route path="/shoppingCart" element={<ShoppingCart />} />
-          <Route path="/userInfo" element={<UserInfo />} />
+          <Route path="/newUser" element={<NewUser />} />
         </Routes>
       </Router>
   );

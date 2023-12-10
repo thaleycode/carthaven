@@ -56,7 +56,7 @@ function LogIn() {
       <Row className="justify-content-center mt-3">
         <Col xs={12} md={6}>
           <p className="text-center">
-            Don't have an account? <Link to="/newUserSubmit">Sign Up</Link>
+            Don't have an account? <Link to="/newUser">Sign Up</Link>
           </p>
         </Col>
       </Row>
