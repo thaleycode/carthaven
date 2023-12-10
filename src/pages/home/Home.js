@@ -51,6 +51,7 @@ if (token) {
     console.log('Decoded JWT:', tokenInfo);
     const cognitoUsername = tokenInfo['cognito:username'];
     console.log('Cognito Username:', cognitoUsername);
+    console.log(cognitoUsername);
     handleLogin(cognitoUsername);
   }
 } else {
