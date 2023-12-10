@@ -1,0 +1,13 @@
+.main-body {
+    width: 80%;
+}
+
+.item-cards {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item-cards .card {
+    flex: 1;
+    height: 100%;
+}
