@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import carthaven from './carthaven-favicon-color.svg';
 import { useAuth } from './AuthContext';
+import { Auth } from 'aws-amplify';
+
 import './App.css';
 import './components/Footer.css';
 
@@ -12,6 +14,14 @@ import Item from './pages/item/Item.js';
 import LogIn from './pages/login/LogIn.js';
 import ShoppingCart from './pages/shoppingCart/ShoppingCart.js';
 import NewUser from './pages/newUser/NewUser.js'
+
+export async function signOut() {
+  try {
+    await Auth.signOut();
+  } catch (error) {
+    console.log('error signing out: ', error);
+  }
+}
 
 function App() {
 
@@ -40,7 +50,7 @@ function App() {
                   <Nav.Link as={Link} to={'/shoppingCart/:{username}'}>
                     Shopping Cart
                   </Nav.Link>
-                  <Nav.Link as={Link} to="/" onClick={ handleLogout }>
+                  <Nav.Link as={Link} to="/" onClick={ signOut }>
                     Logout
                   </Nav.Link>
                 </>
