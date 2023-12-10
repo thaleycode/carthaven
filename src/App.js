@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import carthaven from './carthaven-favicon-color.svg';
-import { AuthProvider, useAuth } from './AuthContext';
+import { useAuth } from './AuthContext';
 import './App.css';
 import './components/Footer.css';
 
