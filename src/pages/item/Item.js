@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Axios from '../../Axios';
 
-function ItemDetailPage() {
+function Item() {
     const { itemNumber } = useParams();
     const [item, setItem] = useState({});
     const [quantity, setQuantity] = useState(1);
@@ -56,4 +56,4 @@ function ItemDetailPage() {
     );
 }
 
-export default ItemDetailPage;
+export default Item;
