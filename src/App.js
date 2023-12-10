@@ -6,7 +6,7 @@ import { useAuth } from './AuthContext';
 import './App.css';
 import './components/Footer.css';
 
-//pages
+//page imports
 import Home from './pages/home/Home.js';
 import Item from './pages/item/Item.js';
 import LogIn from './pages/login/LogIn.js';
