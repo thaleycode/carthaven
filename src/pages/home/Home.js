@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Home.css';
-import Footer from '../../components/Footer'; // Import the Footer component
+import Footer from '../../components/Footer'; 
 
 import black_shirt from '../../black_shirt.jpg';
 import plates from '../../plates.jpg';
@@ -12,16 +12,53 @@ function Home() {
   const [keyword, setKeyword] = useState('');
   const [category, setCategory] = useState('');
 
-  //###############################################################################
-  //###############################################################################
-  // Dummy data for items, needs to be replaced with database info, and image locations after img upload
+//get the current URL
+const currentUrl = window.location.href;
+
+// parse the URL to extract jwt token
+const urlParams = new URLSearchParams(currentUrl);
+
+// Retrieve the JWT token from a query parameter named "token" (adjust as needed)
+const token = urlParams.get('id_token');
+
+function parseJwt(token) {
+  try {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split('')
+        .map(function (c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join('')
+    );
+
+    return JSON.parse(jsonPayload);
+  } catch (error) {
+    console.log('Error parsing JWT:', error);
+    return null;
+  }
+}
+
+if (token) {
+  // if you have the token, use the `parseJwt` function to decode and parse it
+  const tokenInfo = parseJwt(token);
+  if (tokenInfo) {
+    console.log('Decoded JWT:', tokenInfo);
+    console.log('User ID:', tokenInfo.sub);
+  }
+} else {
+  console.log('Token not found in the URL.');
+}
+
   const items = [
     { id: 1, description: 'Lucky T-shirt', price: 10, category: 'Clothing', image: black_shirt },
     { id: 2, description: 'Grandma\'s Good China', price: 29.99, category: 'Home Goods', image: plates },
     { id: 3, description: 'Electric Drill Set', price: 56.24, category: 'Tools', image: drill },
   ];
 
-  // Filter items based on keyword and category
+  // filter items based on keyword and category
   const filteredItems = items.filter((item) => {
     const keywordMatch = item.description.toLowerCase().includes(keyword.toLowerCase());
     const categoryMatch = category === '' || item.category === category;

@@ -72,7 +72,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/item/:itemNumber" element={<Item />} />
-          <Route path="/login" element={<LogIn />} />
           <Route path="/newUser" element={<NewUser />} />
           <Route path="/shoppingCart" element={<ShoppingCart />} />
           <Route path="/newUser" element={<NewUser />} />
