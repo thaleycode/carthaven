@@ -61,14 +61,17 @@ function Home() {
         <Row className='item-cards'>
           {filteredItems.map((item) => (
             <Col key={item.id} md={4} className="mb-3">
-              <div className="card">
-                <img src={item.image} alt={item.description} className="card-img-top" />
-                <div className="card-body">
-                  <h5 className="card-title">{item.description}</h5>
-                  <p className="card-text">Price: ${item.price}</p>
-                  <p className="card-text">Category: {item.category}</p>
+              {/*link each card to the item detail page by id*/}
+              <Link to={`/item/${item.id}`} key={item.id}></Link>
+                <div className="card">
+                  <img src={item.image} alt={item.description} className="card-img-top" />
+                  <div className="card-body">
+                    <h5 className="card-title">{item.description}</h5>
+                    <p className="card-text">Price: ${item.price}</p>
+                    <p className="card-text">Category: {item.category}</p>
+                  </div>
                 </div>
-              </div>
+              <Link to={`/item/${item.id}`} key={item.id}></Link>
             </Col>
           ))}
         </Row>
