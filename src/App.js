@@ -14,16 +14,6 @@ import Item from './pages/item/Item.js';
 import ShoppingCart from './pages/shoppingCart/ShoppingCart.js';
 import NewUser from './pages/newUser/NewUser.js'
 
-/*
-export async function signOut() {
-  try {
-    await Auth.signOut();
-  } catch (error) {
-    console.log('error signing out: ', error);
-  }
-}
-*/
-
 function App() {
 
   const { isLoggedIn, username, handleLogout } = useAuth();
