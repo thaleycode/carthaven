@@ -16,7 +16,7 @@ function Home() {
 const currentUrl = window.location.href;
 
 // parse the URL to extract jwt token
-const urlParams = new URLSearchParams(currentUrl);
+const urlParams = new URLSearchParams(currentUrl.split('#')[1]);
 
 // Retrieve the JWT token from a query parameter named "token" (adjust as needed)
 const token = urlParams.get('id_token');
