@@ -48,6 +48,7 @@ if (token) {
     console.log('Decoded JWT:', tokenInfo);
     const cognitoUsername = tokenInfo['cognito:username'];
     console.log('Cognito Username:', cognitoUsername);
+    handleLogin(cognitoUsername);
   }
 } else {
   console.log('Token not found in the URL.');
