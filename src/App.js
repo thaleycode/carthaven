@@ -11,7 +11,6 @@ import './components/Footer.css';
 //page imports
 import Home from './pages/home/Home.js';
 import Item from './pages/item/Item.js';
-import LogIn from './pages/login/LogIn.js';
 import ShoppingCart from './pages/shoppingCart/ShoppingCart.js';
 import NewUser from './pages/newUser/NewUser.js'
 
