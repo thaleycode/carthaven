@@ -29,7 +29,7 @@ function Home() {
   });
 
   return (
-    <Container className="mt-5" style={{ width: '80%' }}>
+    <Container className="mt-5" style={{ width: '80%', marginBottom: '400px' }}>
       <h1 className="text-center">Current Inventory</h1>
       <Row>
         <Col md={6} className="mb-3">

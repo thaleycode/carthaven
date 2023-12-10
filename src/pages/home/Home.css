@@ -1,7 +1,3 @@
-.main-body {
-    width: 80%;
-}
-
 .item-cards {
     display: flex;
     flex-wrap: wrap;
