@@ -8,6 +8,7 @@ import './components/Footer.css';
 
 //pages
 import Home from './pages/home/Home.js';
+import Item from './pages/item/Item.js';
 import LogIn from './pages/login/LogIn.js';
 import ShoppingCart from './pages/shoppingCart/ShoppingCart.js';
 import UserInfo from './pages/userInfo/UserInfo.js';
@@ -17,7 +18,6 @@ function App() {
   const { isLoggedIn, username, handleLogout } = useAuth();
   
   return (
-    <AuthProvider>
       <Router>
         <Navbar className="bg-light">
           <Container>
@@ -60,12 +60,12 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/item/:itemNumber" element={<Item />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/shoppingCart" element={<ShoppingCart />} />
           <Route path="/userInfo" element={<UserInfo />} />
         </Routes>
       </Router>
-    </AuthProvider>
   );
 }
 

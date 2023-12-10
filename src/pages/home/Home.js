@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import './Home.css';
 import Footer from '../../components/Footer'; // Import the Footer component
 
@@ -10,16 +11,18 @@ import drill from '../../drill.jpg';
 function Home() {
   const [keyword, setKeyword] = useState('');
   const [category, setCategory] = useState('');
-  // Dummy data for items
-  const dummyData = [
+
+  //###############################################################################
+  //###############################################################################
+  // Dummy data for items, needs to be replaced with database info, and image locations after img upload
+  const items = [
     { id: 1, description: 'Lucky T-shirt', price: 10, category: 'Clothing', image: black_shirt },
     { id: 2, description: 'Grandma\'s Good China', price: 29.99, category: 'Home Goods', image: plates },
     { id: 3, description: 'Electric Drill Set', price: 56.24, category: 'Tools', image: drill },
-    // Add more items here
   ];
 
   // Filter items based on keyword and category
-  const filteredItems = dummyData.filter((item) => {
+  const filteredItems = items.filter((item) => {
     const keywordMatch = item.description.toLowerCase().includes(keyword.toLowerCase());
     const categoryMatch = category === '' || item.category === category;
     return keywordMatch && categoryMatch;
@@ -48,7 +51,7 @@ function Home() {
             <option value="Clothing">Clothing</option>
             <option value="Home Goods">Home Goods</option>
             <option value="Tools">Tools</option>
-            {/* Add more categories here */}
+            {/* add more categories if needed */}
           </select>
         </Col>
       </Row>

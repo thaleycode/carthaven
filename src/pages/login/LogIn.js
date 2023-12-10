@@ -14,7 +14,7 @@ function LogIn() {
 
         const username = data.get('username');
         const password = data.get('password');
-
+      
         Axios.post("/login/", { username, password })
             .then(result => {
             if (result.data.info === "Logged in") {
