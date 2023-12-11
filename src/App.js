@@ -16,7 +16,7 @@ import NewUser from './pages/newUser/NewUser.js'
 
 function App() {
 
-  const { isLoggedIn, handleLogout } = useAuth();
+  const { handleLogout } = useAuth();
   
   return (
       <Router>
