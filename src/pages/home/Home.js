@@ -52,7 +52,7 @@ if (token) {
     const cognitoUsername = tokenInfo['cognito:username'];
     console.log('Cognito Username:', cognitoUsername);
     console.log('this is the test ' + cognitoUsername);
-    handleLogin(cognitoUsername);
+    handleLogin();
   }
 } else {
   console.log('Token not found in the URL.');
