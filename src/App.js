@@ -16,7 +16,7 @@ import NewUser from './pages/newUser/NewUser.js'
 
 function App() {
 
-  const { isLoggedIn, username, handleLogout } = useAuth();
+  const { isLoggedIn, handleLogout } = useAuth();
   
   return (
       <Router>
@@ -35,13 +35,10 @@ function App() {
             <Nav className="ml-auto">
               {isLoggedIn ? (
                 <>
-                  <Nav.Link as={Link} to="/">
-                    Welcome, {username}!
-                  </Nav.Link>
-                  <Nav.Link as={Link} to={'/shoppingCart/:{username}'}>
+                  <Nav.Link as={Link} to={'/shoppingCart/'}>
                     Shopping Cart
                   </Nav.Link>
-                  <Nav.Link as={Link} to="/" onClick={null}>
+                  <Nav.Link as={Link} to="/" onClick={ handleLogout }>
                     Logout
                   </Nav.Link>
                 </>
