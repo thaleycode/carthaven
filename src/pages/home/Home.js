@@ -13,51 +13,6 @@ function Home() {
   const [keyword, setKeyword] = useState('');
   const [category, setCategory] = useState('');
 
-  const { handleLogin } = useAuth();
-
-//get the current URL
-const currentUrl = window.location.href;
-
-// parse the URL to extract jwt token
-const urlParams = new URLSearchParams(currentUrl.split('#')[1]);
-
-// Retrieve the JWT token from a query parameter named "token" (adjust as needed)
-const token = urlParams.get('id_token');
-
-function parseJwt(token) {
-  try {
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(
-      atob(base64)
-        .split('')
-        .map(function (c) {
-          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        })
-        .join('')
-    );
-
-    return JSON.parse(jsonPayload);
-  } catch (error) {
-    console.log('Error parsing JWT:', error);
-    return null;
-  }
-}
-
-if (token) {
-  // if you have the token, use the `parseJwt` function to decode and parse it
-  const tokenInfo = parseJwt(token);
-  if (tokenInfo) {
-    console.log('Decoded JWT:', tokenInfo);
-    const cognitoUsername = tokenInfo['cognito:username'];
-    console.log('Cognito Username:', cognitoUsername);
-    console.log('this is the test ' + cognitoUsername);
-    handleLogin();
-  }
-} else {
-  console.log('Token not found in the URL.');
-}
-
   const items = [
     { id: 1, description: 'Lucky T-shirt', price: 10, category: 'Clothing', image: black_shirt },
     { id: 2, description: 'Grandma\'s Good China', price: 29.99, category: 'Home Goods', image: plates },
