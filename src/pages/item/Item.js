@@ -1,26 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Axios from '../../Axios';
-import { useAuth } from '../../AuthContext'; // Import the AuthContext
+
+import black_shirt from '../../black_shirt.jpg';
+import plates from '../../plates.jpg';
+import drill from '../../drill.jpg';
+
+import './Item.css';
 
 function Item() {
-  const { itemNumber } = useParams();
+  const { itemNumber, itemPrice, itemDescription } = useParams();
   const [item, setItem] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
 
-  const { addToCart } = useAuth(); // Access the addToCart function from AuthContext
 
   useEffect(() => {
-    Axios.get(`/items/${itemNumber}`)
-      .then((response) => {
-        setItem(response.data);
-        setTotalPrice(response.data.price);
-      })
-      .catch((error) => {
-        console.error('Error fetching item details:', error);
-      });
-  }, [itemNumber]);
+    const parsedItemPrice = parseFloat(itemPrice);
+    setItem({ name: itemDescription, price: parsedItemPrice });
+    setTotalPrice(parsedItemPrice * quantity);
+  }, [itemNumber, itemPrice, itemDescription, quantity]);
+
+  let itemImage;
+  switch (itemNumber) {
+    case '1':
+      itemImage = black_shirt;
+      break;
+    case '2':
+      itemImage = plates;
+      break;
+    case '3':
+      itemImage = drill;
+      break;
+    default:
+      itemImage = '';
+  }
 
   const handleQuantityChange = (event) => {
     const newQuantity = parseInt(event.target.value);
@@ -29,22 +42,20 @@ function Item() {
   };
 
   const addToCartHandler = () => {
-    // item object to add to the cart
     const cartItem = {
-      id: item.id,
-      name: item.name,
-      picture: item.picture,
-      price: item.price,
+      item_id: itemNumber,
+      description: itemDescription,
       quantity: quantity,
+      price: itemPrice,
     };
 
-    addToCart(cartItem); // add item to the shopping cart in AuthContext
+    
   };
 
   return (
-    <div>
+    <div className='each-item'>
       <h2>{item.name}</h2>
-      <img src={item.picture} alt={item.name} />
+      <img src={itemImage} alt={item.name} />
       <p>Price: ${item.price}</p>
       <label htmlFor="quantity">Quantity:</label>
       <input
@@ -54,7 +65,7 @@ function Item() {
         onChange={handleQuantityChange}
         min="1"
       />
-      <p>Total Price: ${totalPrice}</p>
+      <p>Total Price: ${totalPrice.toFixed(2)}</p>
       <button onClick={addToCartHandler}>Add to Cart</button>
     </div>
   );

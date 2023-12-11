@@ -100,7 +100,7 @@ if (token) {
           {filteredItems.map((item) => (
             <Col key={item.id} md={4} className="mb-3">
               {/*link each card to the item detail page by id*/}
-              <Link to={`/item/${item.id}`} key={item.id}></Link>
+              <Link to={`/item/${item.id}/${item.price}/${item.description}/`} key={item.id}>
                 <div className="card">
                   <img src={item.image} alt={item.description} className="card-img-top" />
                   <div className="card-body">
@@ -109,7 +109,7 @@ if (token) {
                     <p className="card-text">Category: {item.category}</p>
                   </div>
                 </div>
-              <Link to={`/item/${item.id}`} key={item.id}></Link>
+              </Link>
             </Col>
           ))}
         </Row>
