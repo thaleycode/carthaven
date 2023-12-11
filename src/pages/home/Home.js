@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../AuthContext';
 import './Home.css';
 import Footer from '../../components/Footer'; 
 
@@ -12,8 +11,6 @@ import drill from '../../drill.jpg';
 function Home() {
   const [keyword, setKeyword] = useState('');
   const [category, setCategory] = useState('');
-
-  const { handleLogin } = useAuth();
 
 //get the current URL
 const currentUrl = window.location.href;
@@ -52,7 +49,6 @@ if (token) {
     const cognitoUsername = tokenInfo['cognito:username'];
     console.log('Cognito Username:', cognitoUsername);
     console.log('this is the test ' + cognitoUsername);
-    handleLogin(cognitoUsername)
   }
 } else {
   console.log('Token not found in the URL.');

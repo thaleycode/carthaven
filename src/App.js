@@ -33,25 +33,15 @@ function App() {
               CartHaven
             </Navbar.Brand>
             <Nav className="ml-auto">
-              {isLoggedIn ? (
-                <>
-                  <Nav.Link as={Link} to={'/shoppingCart/'}>
+                  <a href='https://carthaven.auth.us-east-1.amazoncognito.com/login?client_id=74f2kf6am2vik7tu7jad2tm36d&response_type=token&scope=email+openid+phone&redirect_uri=https%3A%2F%2Fmain.d3r8l9a8d3hror.amplifyapp.com%2F' className='nav-link'>
+                    LogIn
+                  </a>
+                  <Nav.Link as={Link} to={'/shoppingCart/:{username}'}>
                     Shopping Cart
                   </Nav.Link>
                   <Nav.Link as={Link} to="/" onClick={ handleLogout }>
                     Logout
                   </Nav.Link>
-                </>
-              ) : (
-                <>
-                  <a href='https://carthaven.auth.us-east-1.amazoncognito.com/login?client_id=74f2kf6am2vik7tu7jad2tm36d&response_type=token&scope=email+openid+phone&redirect_uri=https%3A%2F%2Fmain.d3r8l9a8d3hror.amplifyapp.com%2F' className='nav-link'>
-                    LogIn
-                  </a>
-                  <Nav.Link as={Link} to="/" onClick={ handleLogout }>
-                    Logout
-                  </Nav.Link>
-                </>
-              )}
             </Nav>
           </Container>
         </Navbar>

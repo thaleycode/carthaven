@@ -7,12 +7,6 @@ export function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [shoppingCart, setShoppingCart] = useState([]);
 
-
-  // handle login
-  const handleLogin = (user) => {
-    setIsLoggedIn(true);
-    console.log(setIsLoggedIn)
-  };
   //for user logout
   const handleLogout = () => {
     setIsLoggedIn(false);
@@ -44,7 +38,6 @@ export function AuthProvider({ children }) {
   // provide the authentication state and functions to children components
   const value = {
     isLoggedIn,
-    handleLogin,
     handleLogout,
     shoppingCart,
     addToCart,
