@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 import black_shirt from '../../black_shirt.jpg';
 import plates from '../../plates.jpg';
@@ -12,7 +13,6 @@ function Item() {
   const [item, setItem] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
-
 
   useEffect(() => {
     const parsedItemPrice = parseFloat(itemPrice);
@@ -41,15 +41,31 @@ function Item() {
     setTotalPrice(newQuantity * item.price);
   };
 
-  const addToCartHandler = () => {
-    const cartItem = {
-      item_id: itemNumber,
-      description: itemDescription,
-      quantity: quantity,
-      price: itemPrice,
-    };
+  const handlerAddToCart = async () => {
+    console.log('handler start');
+    const myHeaders = new Headers();
+    myHeaders.append("Content-type", "application/json");
 
-    
+    const data = JSON.stringify({
+      "item_id": itemNumber,
+      "description": itemDescription,
+      "quantity": quantity,
+      "price": itemPrice,
+    })
+
+    console.log(data);
+
+    const reqOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: data,
+      redirect: 'follow'
+    }
+
+    fetch('https://25wufiftb4.execute-api.us-east-1.amazonaws.com/dev', reqOptions)
+      .then(response => response.text())
+      .then(result => alert(JSON.parse(result).body))
+      .catch(error => console.log('error', error))
   };
 
   return (
@@ -66,7 +82,7 @@ function Item() {
         min="1"
       />
       <p>Total Price: ${totalPrice.toFixed(2)}</p>
-      <button onClick={addToCartHandler}>Add to Cart</button>
+      <button onClick={ handlerAddToCart }>Add to Cart</button>
     </div>
   );
 }

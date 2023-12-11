@@ -55,8 +55,8 @@ if (token) {
 
   const items = [
     { id: 1, description: 'Lucky T-shirt', price: 10, category: 'Clothing', image: black_shirt },
-    { id: 2, description: 'Grandma\'s Good China', price: 29.99, category: 'Home Goods', image: plates },
-    { id: 3, description: 'Electric Drill Set', price: 56.24, category: 'Tools', image: drill },
+    { id: 2, description: 'Grandma\'s Good China', price: 15, category: 'Home Goods', image: plates },
+    { id: 3, description: 'Electric Drill Set', price: 59, category: 'Tools', image: drill },
   ];
 
   // filter items based on keyword and category

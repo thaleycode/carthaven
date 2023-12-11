@@ -1,11 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../AuthContext';
-import Axios from '../../Axios';
 
 function ShoppingCart() {
-    const { username, shoppingCart, removeFromCart, updateCartItemQuantity, clearShoppingCart } = useAuth();
-    const [updatedCart, setUpdatedCart] = useState([...shoppingCart]);
+  const { username, shoppingCart, removeFromCart, updateCartItemQuantity, clearShoppingCart } = useAuth();
 
+  const [fetchedData, setFetchedData] = useState(null);
+
+  useEffect(() => {
+    // get data when the component mounts
+    const fetchData = () => {
+      const myHeaders = new Headers();
+      myHeaders.append("Content-type", "application/json");
+
+      const reqOptions = {
+        mode: 'no-cors',
+        method: 'GET',
+        headers: myHeaders,
+      };
+
+      fetch('https://25wufiftb4.execute-api.us-east-1.amazonaws.com/dev/getCart', reqOptions)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          if (data && data.body) {
+            const parsedData = JSON.parse(data.body); // parse JSON
+            setFetchedData(parsedData); // set json data in the state
+            console.log(parsedData)
+          } else {
+            console.error('Empty or invalid response data');
+          }
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    };
+
+    fetchData(); 
+  }, []);
+    
+  
   // find total price of items in the cart
   const calculateTotalPrice = () => {
     return shoppingCart.reduce((total, item) => {
@@ -13,86 +48,10 @@ function ShoppingCart() {
     }, 0);
   };
 
-    const handleRemoveFromCart = (item) => {
-        removeFromCart(item); // Remove the item from the shopping cart
-        setUpdatedCart(updatedCart.filter((cartItem) => cartItem.id !== item.id));
-    };
-
-    const handleQuantityChange = (item, newQuantity) => {
-        // updateCartItemQuantity from authContext to update the item quantity
-        updateCartItemQuantity(item, newQuantity);
-    };
-
-
-    const placeOrder = () => {
-        const orderItems = shoppingCart.map((item) => ({
-            itemId: item.id,
-            quantity: item.quantity,
-        }));
-
-        // data to send
-        const orderData = {
-            username: username,
-            items: orderItems,
-        };
-
-        // Send a POST request to your server to submit the order
-        Axios.post('/api/orders', orderData)
-            .then((response) => {
-            
-            console.log('Order submitted successfully', response.data);
-            
-            //clear the cart after submission
-            clearShoppingCart();
-            })
-            .catch((error) => {
-            console.error('Error submitting order', error);
-            });
-    
-    };
 
   return (
     <div>
-      <h2>Shopping Cart</h2>
-      {shoppingCart.length === 0 ? (
-        <p>Your cart is empty.</p>
-      ) : (
-        <>
-          <table>
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {shoppingCart.map((item) => (
-                <tr key={item.id}>
-                  <td>{item.name}</td>
-                  <td>${item.price.toFixed(2)}</td>
-                  <td>
-                    <input
-                      type="number"
-                      value={item.quantity}
-                      onChange={(e) => handleQuantityChange(e, item)}
-                      min="1"
-                    />
-                  </td>
-                  <td>${(item.price * item.quantity).toFixed(2)}</td>
-                  <td>
-                    <button onClick={() => handleRemoveFromCart(item)}>Remove</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <p>Total Price: ${calculateTotalPrice().toFixed(2)}</p>
-          <button onClick={placeOrder}>Place Order</button>
-        </>
-      )}
+      sdfasdf
     </div>
   );
 }

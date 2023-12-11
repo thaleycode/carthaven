@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import Axios from '../../Axios';
 
 function NewUser() {
   const [formData, setFormData] = useState({
@@ -21,6 +20,7 @@ function NewUser() {
     const [submitMessage, setSubmitMessage] = useState('');
     const navigate = useNavigate();
 
+  /*
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -39,7 +39,7 @@ function NewUser() {
         console.error(error);
       });
   };
-
+*/
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({
@@ -51,7 +51,7 @@ function NewUser() {
   return (
     <Container>
       <h2 className="text-center mt-4">New User Registration</h2>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={null}>
         <Row>
           <Col md={6}>
             <Form.Group controlId="username">
