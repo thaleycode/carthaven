@@ -51,7 +51,6 @@ function ShoppingCart() {
 
   return (
     <div>
-      sdfasdf
     </div>
   );
 }
